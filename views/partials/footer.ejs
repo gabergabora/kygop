@@ -1,0 +1,100 @@
+<section id="FOOTER_NEW">
+    <div class="mc">
+
+        <div class="c-40">
+            <picture>
+                <!-- <source srcset="/img/pega-pool.webp" type="image/webp"> -->
+                <source srcset="/img/logo.png" type="image/png">
+                <img data-src="/img/logo.png" alt="Kygo Pool" class="lazyload logo">
+            </picture>
+            <br />
+            <small>Kygo Pool is a crypto mining pool that is on a mission to reduce crypto miners carbon footprint. Join Kygo Pool today and help make a difference.</small>
+        </div>
+        <div class="c-20">
+            <h3>Useful Links</h3>
+            <a href="#" target="_blank">Service Status</a>
+            <a href="#">Pool Hasrate API</a>
+            <a href="#">Media Pack</a>
+        </div>
+        <div class="c-20">
+            <h3>Pages</h3>
+            <a href="/contact">Contact Us</a>
+            <a href="/terms">Terms & Conditions</a>
+            <a href="/privacy-policy">Privacy Policy</a>
+        </div>
+        
+        <div class="c-20">
+            <h3>Access</h3>
+            <a href="/login" >Login</a>
+            <a href="/register" >Signup</a>
+        </div>
+        
+
+        <div class="hs-40"></div>
+        <div class="c-100-f">
+            <small>
+                Kygo Pool Ltd, Unit 14a Anvil Centre Prospect Business Park Swanage BH19 1EJ United Kingdom
+                <br />
+                <span>Company number: 1320769</span>
+                <br /><br />
+                <span>&copy; 2022 Kygo Pool. All rights reserved.</span>
+            </small>
+        </div>
+
+       
+
+    </div>
+
+     <picture>
+        <source srcset="/img/corner-walls.webp" type="image/webp">
+        <source srcset="/img/corner-walls.png" type="image/png">
+        <img data-src="/img/corner-walls.png" alt="Kygo Pool" class="lazyload corner-walls">
+    </picture>
+    
+</section>
+
+
+
+</body>
+
+
+<script src="/js/min.js"></script>
+<script src="../code.jquery.com/jquery-2.2.4.min.js"integrity="sha256-BbhdlvQf/xTY9gja0Dq3HiwQF8LaCRTXxZKRutelT44="crossorigin="anonymous"></script>
+<script src="/js/scripts.js"></script>
+<script src="../unpkg.com/aos%402.3.1/dist/aos.js"></script>
+<script src="/inner/js/scripts.js"></script>
+
+<script>
+AOS.init();
+</script>
+
+<script type="text/javascript">
+function CloseMenu() {
+document.getElementById("MainBtn").checked = false;
+}
+</script>
+
+<script type="text/javascript">
+var h = $('.flag').width();
+for(var i = 0; i < h; i++){
+    var flagElement = $("<div class='wave'>");
+    flagElement.css('background-position', -i + "px 0");
+    flagElement.css('animation-delay', i * 5 + 'ms');
+    $('.flag').append(flagElement);
+}
+</script>
+
+<script src="../code.jquery.com/jquery-3.6.1.min.js" integrity="sha256-o88AwQnZB+VDvE9tvIXrMQaPlFFSUTR+nldQm1LuPXQ=" crossorigin="anonymous"></script>
+<script src="../www.google.com/recaptcha/apie62c.js?render=6LcD8AccAAAAABBRBtqgJ9qXxSylKjesRW-dyGLj"></script>
+<script>
+    grecaptcha.ready(function () { grecaptcha.execute('6LcD8AccAAAAABBRBtqgJ9qXxSylKjesRW-dyGLj', { action: 'register' }).then(function (token) { $( "input[name='recaptcha_response']" ).val(token); }); }); 
+    $( "#contact-login" ).submit(function( event ) { event.preventDefault(); $.ajax({ method: "POST", url: "/login.php", data: { password: $("#password").val(), email: $("#email").val(), recaptcha_response: $("input[name='recaptcha_response']").val() } }); $("#contact-login .alert-c").show(); });
+    $( "#ml-signup-form" ).submit(function( event ) {  event.preventDefault(); $("#ml-signup-form p").hide(); $.ajax({ method: "POST", url: "signup.php", data: { name: $("#ml_name").val(), email: $("#ml_email").val(), recaptcha_response: $("#ml-signup-form input[name='recaptcha_response']").val() } }).done(function( msg ) {  if( msg == 'true' ) { $("#ml-signup-form .alert-c.positive").show(); $("#ml_name").val(''); var e = $("#ml_email").val(); window.location.href="/early-access-waiting-list?email="+e; }else { $("#submit-error").show(); } }) }); 
+    $( "#contact-login" ).submit(function( event ) { event.preventDefault(); $.ajax({ method: "POST", url: "../login.php", data: { password: $("#password").val(), email: $("#email").val(), recaptcha_response: $("#ml-signup-form input[name='recaptcha_response']").val() } }); $("#contact-login .alert-c").show(); });
+    $(".g-btn-txt").click(function(){
+        $(this).parent().parent().hide();
+    });
+    
+</script>
+
+</html>

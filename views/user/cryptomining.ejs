@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Mining</title>
+    <link rel="stylesheet" href="/stylesheets/user/deposit.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Crypto Mining</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Crypto Mining</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p>Investment</p>
+                <a href="/dashboard/new-crypto-mining-investment" style="text-decoration: none;" class="depositbtn">
+                    <i class="fa-solid fa-plus"></i> New Investment
+                </a>
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                     View Calculator
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Mining Calculator</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <%- partial('../partials/miningcal')%>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+            
+        </div>
+
+        <div id="deposithistory">
+           <div id="deposithistorybox">
+            <p>INVESTMENTS HISTORY</p>
+            <div id="tablecontainer">
+                <table id="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Date</th>
+                          <th>Package Type</th>
+                          <th>Power</th>
+                          <th>Storage</th>
+                          <th>Invested Amount</th>
+                          <th>Profits</th>
+                          <th>Status</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (user.investment < 1 ) { %>
+                            <td colspan="9">
+                                No investment yet.
+                            </td>
+                        <% } else { %>
+                            <% for (let investment of user.investment) {%>
+                                <% if (investment.investmentType === 'Crypto Mining') {%>
+                                <tr>
+                                    <td><li></td>
+                                    <td><%= investment.investmentdate %></td>
+                                    <td><%= investment.packagetype %> </td>
+                                    <td><%= investment.power %> </td>
+                                    <td><%= investment.storage %> </td>
+                                    <td>$<%= investment.investedamount.toLocaleString() %></td>
+                                    <td>$<%= investment.investmentprofit.toLocaleString() %></td>
+                                    <td><%= investment.status %></td>
+                                    <td><a href="/dashboard/investment/<%= investment.id %>" class="btn btn-success" >View</a></td>
+                                </tr>
+                                <% } %>
+                            <% } %> 
+                        <% } %>  
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+       
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

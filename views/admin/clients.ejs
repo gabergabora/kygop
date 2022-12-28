@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clients</title>
+    <link rel="stylesheet" href="/stylesheets/user/deposit.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Clients</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Clients</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p>Number of Registered Users: <%= clients.length %> </p>
+                <form action="/admin/admin.clients/findUser" method="post" id="searchform" class="d-flex">
+                    <input class="form-control me-2 border-primary" type="search" name="findUser" placeholder="Search Username" aria-label="Search" required>
+                    <button class="btn btn-primary" type="submit">Search</button>
+                </form>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+           <div id="deposithistorybox">
+            <p>ALL REGISTERED USERS</p>
+            <div id="tablecontainer">
+                <table id="historytable">
+                    <thead>
+                        <tr>
+                          <th>#</th>
+                          <th>Name</th>
+                          <!-- <th>Username</th> -->
+                          <th>Email</th>
+                          <th>Phone Number</th>
+                          <th>Balance</th>
+                          <th>Verification Status</th>
+                          <th>View</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% for (let i = 0; i < clients.length; i++) { %> 
+                          <tr>
+                            <td><%= [i+1] %> </td>
+                            <td><%= clients[i].firstname %> <%= clients[i].lastname %></td>
+                            <!-- <td><%= clients[i].username %></td> -->
+                            <td><%= clients[i].email %></td>
+                            <td><%= clients[i].phonenumber %></td>
+                            <td>$ <%= clients[i].wallet %></td>
+                            <td><%= clients[i].verificationstatus %></td>
+                            <td><a href="/admin/admin.clients/<%= clients[i].id %>" class="view btn btn-primary">View</a></td>
+                          </tr>
+                          <% } %> 
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

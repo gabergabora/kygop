@@ -1,0 +1,188 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Info</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Investment Info</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Investment Info</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="acctsumbox">
+            <div id="inneracctsumbox">
+                <div class="acctsum">
+                    <span>
+                        <p>Investment Type:</p>
+                        <small><%= investment.investmentType %></small>
+                    </span>
+                    <span>
+                        <p>Nining ID:</p>
+                        <small><%= investment.id %></small> 
+                    </span>
+                    <span>
+                        <p>Mining Package:</p>
+                        <small><%= investment.packagetype %></small>
+                    </span>
+                    <span>
+                        <p>Mining Duration:</p>
+                        <small><%= investment.duration %></small>
+                    </span>
+                    <span>
+                        <p>Mining Power:</p>
+                        <small><%= investment.power %></small>
+                    </span>
+
+                    <span>
+                        <p>Service Charge:</p>
+                        <small class=""><%= investment.charges%></small>
+                    </span>
+
+                    <span>
+                        <p>Client Name:</p>
+                        <small><%= client.firstname%> <%= client.lastname%></small>
+                    </span>
+
+                    <span>
+                        <p>Client Email:</p>
+                        <small><%= client.email%></small>
+                    </span>
+
+                    <span>
+                        <p>Client Username:</p>
+                        <small><%= client.username%></small>
+                    </span>
+                    
+                </div>
+    
+                <div class="acctsum">
+                   
+                    <span>
+                        <p>Daily ROI:</p>
+                        <small><%= investment.profitpercentage %></small>
+                    </span>
+                    <span>
+                        <p>Invested Amount:</p>
+                        <small>$<%= investment.investedamount.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Profits:</p>
+                        <small>$<%= investment.investmentprofit.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Total Income:</p>
+                        <small>$<%= totalincome.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Mining Status:</p>
+                        <% if (investment.status === 'Pending') { %> 
+                            <small class="unverifiedstat"><%= investment.status %></small>
+                        <% } else if (investment.status === 'Completed'){ %> 
+                            <small class="verifiedstat"><%= investment.status %></small>
+                        <% } else if (investment.status === 'Active'){ %> 
+                            <small class="pendingstat"><%= investment.status %></small>
+                        <% } %> 
+                        
+                    </span>
+                    <span class="action">
+                        <% if (investment.status == 'Active') { %> 
+                            <div class="dropdown">
+                                <button class="btn btn-secondary dropdown-toggle actionboxbutton1" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                  Add funds to current investment.
+                                </button>
+                                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                  <li>
+                                    <form action="/admin/admin.investment/<%= client.id%>/<%= investment.id%>?_method=PUT" method="post" class="addfundsform">
+                                        <input type="number" placeholder="Amount to be added" class="addfundsforminput" name="addprofits" required>
+                                        <button class="btn btn-success" >Add Profits</button>
+                                    </form>
+                                  </li>
+                                </ul>
+                            </div>
+                        <% } %> 
+    
+                        <% if (investment.status == 'Active') { %> 
+                            <div>
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary" id="end" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                                    End Investment
+                                </button>
+                  
+                                <!-- Modal -->
+                                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                                <h5 class="modal-title" id="exampleModalLabel">End Investment</h5>
+                                                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>Do you wish to end this investment?</p>
+                                                <form action="/admin/admin.investment/<%= client.id%>/<%= investment.id%>/endinvestment?_method=PUT" method="post" >
+                                                    <button class="btn btn-danger">End Investment</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                                                
+                                            </div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        <% } else if (investment.status == 'Completed') { %> 
+                            <button type="button" class="btn btn-primary">
+                                Investment Completed
+                            </button>
+                        <% } else { %> 
+                            <button type="button" class="btn btn-primary">
+                                Investment Pending!
+                            </button>
+                        <% } %> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

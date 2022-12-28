@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment</title>
+    <link rel="stylesheet" href="/stylesheets/user/investmentpackages.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+        <div id="investmentplans">
+            <div id="investmentplansbox">
+                 <div id="investmentplansbox-head">
+                     <h2>CRYPTO MINING CONTRACTS</h2>
+                     <p>Select a mining contract.</p>
+                 </div>
+                 <div id="packagebox">
+                     <% for (let investmentplan of investmentplans) { %>
+                         <div class="investmentplans">
+                             <div class="packageinfo">
+                                 <h2><%= investmentplan.packagename.toUpperCase() %> PACKAGE</h2>
+                                 <p>Investment Duration: <%= investmentplan.duration %></p>
+                                 <p>Minimum Amount: $ <%= investmentplan.minimumamount.toLocaleString()  %></p>
+                                 <p>Maximum Amount: $ <%= investmentplan.maximumamount.toLocaleString()  %></p>
+                                 <p>Mining Storage: <%= investmentplan.storage %></p>
+                                 <p>Mining Power: <%= investmentplan.power %></p>
+                                 <p>Daily Profit Percentage: <%= investmentplan.profitpercentage %></p>
+                                 <p>Service Charge: <%= investmentplan.charges %></p>
+                             </div>
+                             <div class="actions">
+                                 <div class="dropdown">
+                                     <button class="btn btn-secondary dropdown-toggle dd-menu" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                                       Select Package
+                                     </button>
+                                     <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                                       <li>
+                                           <form action="/dashboard/new-crypto-mining-investment/<%= investmentplan.id %>" method="post" class="activateform">
+                                                <select name="cryptocurrency" id="" class="activateforminput" required>
+                                                    <option value="" selected>Select Cryptocurrency</option>
+                                                    <% for (crypto of depositmethods) { %>
+                                                        <option value="<%= crypto.depositmethodname %>"><%= crypto.depositmethodname %></option>
+                                                    <% } %> 
+                                                </select>
+                                               <input type="number" name="investedamount" class="activateforminput" placeholder="Amount $" required>
+                                               <button class="btn btn-success">Start Investment</button>
+                                           </form>
+                                       </li>
+                                     </ul>
+                                   </div>
+                             </div>
+                         </div>
+                     <% } %> 
+                 </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

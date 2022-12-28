@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Notifications</title>
+    <link rel="stylesheet" href="/stylesheets/user/notifications.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Notifications</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Notifications</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="div2">
+            <div class="div2box">
+                <span class="header">Notifications</span class="header">
+                <div class="div2boxinner">
+                   <p>You have <%= user.notifications.length %> Notifications</p>
+                </div>
+            </div>
+        </div>
+
+        <div class="deposithistory">
+            <div class="deposithistorybox">
+             <p>NOTIFICATION HISTORY</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                     <thead>
+                       <tr>
+                         <th>S/N</th>
+                         <th>Date</th>
+                         <th>Title</th>
+                         <th>Message</th>
+                         <th>Action</th>
+                       </tr>
+                     </thead>
+          
+                     <tbody>
+                            <% for (let i = 0; i < user.notifications.length; i++) { %> 
+                                 <tr>
+                                   <td><li></li></td>
+                                   <td><%= user.notifications[i].notificationdate %></td>
+                                   <td> <%= user.notifications[i].title %></td>
+                                   <td><%= user.notifications[i].message.slice(0, 40) %>....</td>
+                                   <td>
+                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#viewnotification<%= i %>">
+                                            View 
+                                        </button>
+                                    
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="viewnotification<%= i %>" tabindex="-1" aria-labelledby="viewnotification<%= i %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="viewnotification<%= i %>Label"><%= user.notifications[i].title %></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    <%= user.notifications[i].message %>
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                 </tr>
+                            <% } %> 
+                     </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

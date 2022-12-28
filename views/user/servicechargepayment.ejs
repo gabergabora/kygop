@@ -1,0 +1,162 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, shrink-to-fit=no">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Permanent+Marker&display=swap');
+        @import url('https://fonts.googleapis.com/css2?family=Bakbak+One&display=swap');
+    </style>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <link rel="stylesheet" href="/stylesheets/user/otherpayment.css">
+    <title>Deposit</title>
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Service Charge Payment</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Service Charge Payment</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+        
+        <div id="div2">
+            <div id="div2box">
+                <span>You have to deposit 20% of your total income to the company's account in order to continue with your withdrawal.</span>
+                <span>
+                    <u>Reason for External Payment:</u>
+                    <br>
+                    Here on this platform, we run a 100% privacy system, which means we do not have access to the funds of any of our users.
+                    Due to this we are unable to automatically deduct our 20% share of your profit and an external payment is needed.
+                    <br> Once you make payment for the service charge, you will then be able to withdraw all of your incomes directly to your wallet.
+                </span>
+                <span>
+                    <u>NOTE:</u>
+                    The service charge is 20% of your total income.
+                    <br>In your case, you are to pay $<%= charges.toLocaleString() %>
+                    <br>Sorry for all inconveniences.
+                </span>
+            </div>
+        </div>
+
+        <div id="div3">
+            <div id="div3box">
+                <p>Pay Service Charges</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-plus"></i> Make Payment
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">SERVICE CHARGE PAYMENT</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/user/service-charge-payment" method="post" id="depositform">
+                                <select name="transactionmethod" class="depositformselect" required>
+                                    <option value="" selected>Choose Payment Method</option>
+                                    <% for (let depositmethod of depositmethods) { %>
+                                        <option value="<%=depositmethod.depositmethodname%>"><%=depositmethod.depositmethodname%></option>
+                                    <% } %>  
+                                    
+                                </select>
+                                <span><i class="fas fa-dollar-sign"></i><input type="number" placeholder="Amount" value="<%= charges%>" class="depositforminput" name="amount" required readonly></span>
+            
+                                <span><input type="text" placeholder="Narration" value="Service Charge" class="depositforminput" name="narration" required readonly></span>
+                                <button type="submit">Pay</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+         <div id="deposithistorybox">
+            <p>PAYMENT HISTORY</p>
+            <div id="tablecontainer">
+             <table id="historytable">
+                 <thead>
+                   <tr>
+                     <th>S/N</th>
+                     <th>Date</th>
+                     <th>Deposit Method</th>
+                     <th>Amount</th>
+                     <th>Narration</th>
+                     <th>Status</th>
+                     <th>Proof</th>
+                   </tr>
+                 </thead>
+      
+                 <tbody>
+                     <% if (deposits.length < 1 ) { %>
+                         <td colspan="7">No payment has been made yet.</td>
+                     <% } else { %>
+                         <% for (let deposit of deposits) {%>
+                             <tr>
+                               <td><li></td>
+                               <td><%= deposit.transactiondate %></td>
+                               <td><%= deposit.transactionmethod %> </td>
+                               <td>$<%= deposit.amount.toLocaleString() %></td>
+                               <td><%= deposit.narration %></td>
+                               <td><%= deposit.status %></td>
+                               <td>
+                                 <% if (deposit.status === 'Pending') { %>
+                                     <% if (deposit.transactionproof.length < 1 ) { %>
+                                         <a href="/dashboard/deposits/payment/<%=deposit.id%>" class="uploadproofbtn">Upload Proof</a>
+                                     <% } else { %>
+                                        <span>Proof submitted</span>
+                                     <% } %>  
+                                 <% } %>  
+                                 
+                               </td>
+                             </tr>
+                             <% } %> 
+                     <% } %> 
+                 </tbody>
+               </table>
+               </div>
+         </div>
+        </div>
+
+     </div>
+
+     <script src="/script/app.js"></script>
+
+</body>
+</html>

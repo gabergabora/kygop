@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>KygoPool || Login</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        </style>
+    <link rel="stylesheet" href="/stylesheets/login.css">
+</head>
+<body>
+    <div id="div1">
+        <div id="div1box">
+          <p><a href="/"><img src="/img/logo.png" id="logo" /></a></p>
+          <p>Log into your account.</p>
+          <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+            <form method="post" id="registerform" action="/secureadmin.login">
+                  <div class="registerform-group">
+                    <span>Username</span>
+                      <input class="" name="username" placeholder="Username" type="text" required="">
+                    </div>
+                  <div class="registerform-group">
+                    <span>Password</span>
+                    <input type="password" data-minlength="7" class="" name="password" id="inputPassword" placeholder="Password" required="">
+                  </div>
+              
+                  <!-- Submit Form Button Starts -->
+                    <button class="btn btn-primary btn-block dblue-bg hoverblue" name="signup" type="submit">Login</button>
+                  </p>
+                  <!-- Submit Form Button Ends -->
+      </form>
+        </div>
+    </div>
+    
+</body>
+</html>

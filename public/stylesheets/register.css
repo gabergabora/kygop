@@ -1,0 +1,169 @@
+body {
+    margin: 0;
+    padding: 0;
+    background-color: rgb(47, 50, 59);
+    height: 110vh;
+}
+
+#logo {
+    width: 130px;
+}
+
+.blue-color {
+    color: rgb(46, 150, 253);
+}
+
+#div1 {
+    width: 100%;
+    height: 100%;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: center;
+    font-family: 'Oswald', sans-serif;
+    color: white;
+}
+
+#div1box {
+    width: 550px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+
+    background-color: rgb(58, 61, 70);
+    border-radius: 3px;
+    box-sizing: border-box;
+    box-shadow: 0 4px 5px 0 rgb(0 0 0 / 14%), 0 1px 10px 0 rgb(0 0 0 / 12%), 0 2px 4px -1px rgb(0 0 0 / 20%)
+}
+
+#registerform {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    
+}
+
+.registerform-group {
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    margin: 4px 0;
+}
+
+#registerform input {
+    width: 100%;
+    padding: 8px;
+    background-color: rgb(71, 74, 83);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: rgb(223, 221, 221);
+    
+}
+
+#registerform input::placeholder {
+    visibility: hidden;
+}
+
+#registerform select {
+    width: 100%;
+    padding: 8px;
+    background-color: rgb(71, 74, 83);
+    border-radius: 4px;
+    border: none;
+    outline: none;
+    color: rgb(223, 221, 221);
+}
+
+#registerform select::placeholder {
+    color: rgb(223, 221, 221);
+}
+
+#registerform span {
+    align-self: flex-start;
+    font-size: 0.6em;
+    color: white;
+}
+
+#registerform button {
+    background-color: rgb(21, 109, 197);
+    color: white;
+    border-radius: 4px;
+    padding: 8px;
+    transition: 0.6s;
+    border: none;
+    margin: 10px 0;
+    width: 100%;
+}
+
+#registerform button:hover {
+    background-color: rgb(8, 74, 139);
+    cursor: pointer;
+}
+
+@media (max-width:570px) {
+    #div1box {
+        width: 100%;
+    }
+}
+
+.flashbox {
+    width: 100%;
+    padding: 10px 20px;
+}
+  
+    /* The alert message box */
+  .flashboxsuccess-alert {
+      padding: 10px 30px;
+      background-color: #07bd68;
+      border: 1px solid #058046;
+      border-radius: 5px;
+      color: white;
+      margin: 15px 0;
+    }
+    
+    /* The close button */
+    .flashboxsuccess-closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    /* When moving the mouse over the close button */
+    .flashboxsuccess-closebtn:hover {
+      color: black;
+    }
+  
+  .flashboxerror-alert {
+      padding: 10px 30px;
+      background-color: #f44336; /* Red */
+      border: 1px solid rgb(165, 9, 9);
+      border-radius: 5px;
+      color: white;
+      margin: 15px 0;
+    }
+    
+    /* The close button */
+    .flashboxerror-closebtn {
+      margin-left: 15px;
+      color: white;
+      font-weight: bold;
+      float: right;
+      font-size: 22px;
+      line-height: 20px;
+      cursor: pointer;
+      transition: 0.3s;
+    }
+    
+    /* When moving the mouse over the close button */
+    .flashboxerror-closebtn:hover {
+      color: black;
+    }
+  
+  

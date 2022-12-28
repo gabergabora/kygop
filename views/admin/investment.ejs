@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investments</title>
+    <link rel="stylesheet" href="/stylesheets/admin/deposit.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Investments</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Investments</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>ACTIVE INVESTMENTS</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Username</th>
+                        <th>Investment Type</th>
+                        <th>Package Type</th>
+                        <th>Invested Amount</th>
+                        <th>Profits</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <% if (activeinvestments.length > 0 ) { %> 
+                            <% for (let client of clients ) { %> 
+                                <% for (let investment of client.investment) {%>
+                                    <% if (investment.status == 'Active') { %>
+                                        <tr>
+                                            <td><li></td>
+                                            <td><%= investment.investmentdate %></td>
+                                            <td><%= client.username %> </td>
+                                            <td><%= investment.investmentType %> </td>
+                                            <td><%= investment.packagetype %> </td>
+                                            <td>$<%= investment.investedamount.toLocaleString() %></td>
+                                            <td>$<%= investment.investmentprofit.toLocaleString() %></td>
+                                            <td><%= investment.status %></td>
+                                            <td><a href="/admin/admin.investment/<%= client.id%>/<%= investment.id%>"  class="btn btn-success" >View</a></td>
+                                        </tr>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        <% } else { %> 
+                            <td colspan="9">
+                                No active investment .
+                            </td>
+                        <% } %>  
+                    </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+
+        <div class="deposithistory">
+            <div class="deposithistorybox">
+             <p>INACTIVE INVESTMENTS</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                    <thead>
+                        <tr>
+                        <th></th>
+                        <th>Date</th>
+                        <th>Username</th>
+                        <th>Investment Type</th>
+                        <th>Package Type</th>
+                        <th>Invested Amount</th>
+                        <th>Profits</th>
+                        <th>Status</th>
+                        <th>Action</th>
+                        </tr>
+                    </thead>
+        
+                    <tbody>
+                        <% if (inactiveinvestments.length > 0 ) { %> 
+                            <% for (let client of clients ) { %> 
+                                <% for (let investment of client.investment) {%>
+                                    <% if (investment.status == 'Completed') { %>
+                                        <tr>
+                                            <td><li></td>
+                                            <td><%= investment.investmentdate %></td>
+                                            <td><%= client.username %> </td>
+                                            <td><%= investment.investmentType %> </td>
+                                            <td><%= investment.packagetype %> </td>
+                                            <td>$<%= investment.investedamount.toLocaleString() %></td>
+                                            <td>$<%= investment.investmentprofit.toLocaleString() %></td>
+                                            <td><%= investment.status %></td>
+                                            <td><a href="/admin/admin.investment/<%=client.id%>/<%=investment.id%> "  class="btn btn-success" >View</a></td>
+                                        </tr>
+                                    <% } %>
+                                <% } %>
+                            <% } %>
+                        <% } else { %> 
+                            <td colspan="9">
+                                No inactive investment .
+                            </td>
+                        <% } %>  
+                    </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

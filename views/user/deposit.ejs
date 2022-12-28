@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit</title>
+    <link rel="stylesheet" href="/stylesheets/user/deposit.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Deposit</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Deposit</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="walletbox">
+            <div class="walletboxinner">
+                <span class="walletamountspan">
+                    <small>Wallet Balance:</small>
+                    <% if (user.wallet === 0) { %> 
+                        <p>$0.00</p>
+                    <% } else { %> 
+                        <p>$<%= user.wallet.toLocaleString() %> </p>
+                    <% } %> 
+                </span>
+            </div>
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p>Make Deposit</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-plus"></i> New Deposit
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">DEPOSIT</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/dashboard/deposits" method="post" id="depositform">
+                                <p>Choose any deposit method, enter amount and click deposit.</p>
+                               <select name="transactionmethod" class="depositformselect" required>
+                                   <option value="" selected>Deposit Method</option>
+                                    <% for (let depositmethod of depositmethods) { %>
+                                        <option value="<%=depositmethod.depositmethodname%>"><%=depositmethod.depositmethodname%></option>
+                                    <% } %>  
+                                   
+                               </select>
+                               <span><i class="fas fa-dollar-sign"></i><input type="number" placeholder="Amount" class="depositforminput" name="amount" required></span>
+                               <button type="submit">Deposit</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+           <div id="deposithistorybox">
+            <p>DEPOSIT HISTORY</p>
+            <div id="tablecontainer">
+                <table id="historytable">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Date</th>
+                        <th>Deposit Method</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                        <th>Proof</th>
+                      </tr>
+                    </thead>
+         
+                    <tbody>
+                        <% if (deposits.length < 1 ) { %>
+                            <td colspan="6">No deposit has been made.</td>
+                        <% } else { %>
+                            <% for (let deposit of deposits) {%>
+                                <tr>
+                                  <td><li></td>
+                                  <td><%= deposit.transactiondate %></td>
+                                  <td><%= deposit.transactionmethod %> </td>
+                                  <td>$<%= deposit.amount.toLocaleString() %></td>
+                                  <td><%= deposit.status %></td>
+                                  <td>
+                                    <% if (deposit.status === 'Pending') { %>
+                                        <% if (deposit.transactionproof.length < 1 ) { %>
+                                            <a href="/dashboard/deposits/payment/<%=deposit.id%>" class="uploadproofbtn">Upload Proof</a>
+                                        <% } else { %>
+                                            <span>Proof submitted</span>
+                                        <% } %>  
+                                    <% } %>  
+                                    
+                                  </td>
+                                </tr>
+                                <% } %> 
+                        <% } %> 
+                    </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

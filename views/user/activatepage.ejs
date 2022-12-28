@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Activate Account</title>
+    <link rel="stylesheet" href="/stylesheets/user/activate-account.css">
+</head>
+<body>
+    <div id="div1">
+        <div id="div1box">
+            <div class="flashbox">
+                <% if(success && success.length) { %>
+                       <div class="flashboxsuccess-alert">
+                           <%= success %> 
+                           <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+                   <% } %> 
+               
+                   <% if(error && error.length) { %>
+                           <div class="flashboxerror-alert">
+                               <%= error %> 
+                               <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                               
+                           </div>
+                   <% } %> 
+                   
+            </div>
+            <h3>Hello <%= user.username %>!</h3>
+            <p>Please activate your account by clicking the button bellow.</p>
+
+            <form action="/user/<%= user.id %>/activate-account/<%= tok.token %>?_method=PUT" method="post">
+                <button class="resendbtn">Activate Account</button>
+            </form>
+        </div>
+    </div>
+    
+</body>
+</html>

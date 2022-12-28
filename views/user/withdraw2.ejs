@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdraw</title>
+    <link rel="stylesheet" href="/stylesheets/user/payment.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Withdraw</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Withdraw</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+
+        <div id="amount">
+            <p>Amount:</p>
+            <div class="input-group mb-3">
+                <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-dollar-sign"></i></span>
+                <input type="text" class="form-control" value="<%= withdraw.amount %> " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
+            </div>
+        </div>
+         
+
+        <div id="wallet" style="border: none;">
+            <h3>Wallet Details</h3>
+             <div id="walletbox">
+                 <div id="walletinnerbox">
+                    <p>Enter Your <%= withdraw.withdrawmethod %> Wallet Address:</p>
+                     <form action="/dashboard/withdrawal/<%= withdraw.id %>?_method=PUT" method="post" class="input-group mb-3" id="walletdetails">
+                         <span class="input-group-text" id="inputGroup-sizing-default">Wallet</span>
+                         <input type="text" name="withdrawaddress" class="form-control" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default">
+                         <button class="btn btn-outline-secondary" type="submit">Submit</button>
+                     </form>
+                 </div>
+             </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

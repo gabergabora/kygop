@@ -1,0 +1,111 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+
+#investmentplans {
+    width: 100%;
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    font-family: 'Oswald', sans-serif;
+    padding-bottom: 30px;
+}
+
+#investmentplansbox {
+    width: 90%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+}
+
+#investmentplansbox-head {
+    width: 100%;
+    text-align: center;
+    padding-top: 20px;
+}
+
+#packagebox {
+    width: 100%;
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: row;
+    justify-content: space-evenly;
+}
+
+.packageinfo h2 {
+    border-bottom: 4px solid rgb(10, 111, 211);
+}
+
+.investmentplans {
+    background-color: var(--background);
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: rgba(0, 0, 0, 0.16) 0px 3px 6px, rgba(0, 0, 0, 0.527) 0px 3px 6px;
+    margin-top: 10px;
+}
+
+.startlink {
+    background-color: rgb(25, 117, 209);
+    color: white;
+    text-decoration: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    border: none;
+    transition: 0.6s;
+}
+
+.startlink:hover {
+    background-color: rgb(14, 67, 121);;
+    color: white;
+}
+
+.dd-menu {
+    background-color: gray !important;
+    padding: 10px !important;
+}
+
+.dd-menu li {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.activateform {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
+.activateforminput {
+    width: 100%;
+    padding: 6px 12px;
+    margin: 5px;
+}
+
+.activateforminput::placeholder {
+    color: black;
+}
+
+/* .activateformbutton {
+    margin-top: 6px;
+    padding: 5px;
+    background-color: rgb(18, 114, 209);
+    color: white;
+    width: 100%;
+    transition: 0.5s;
+}
+
+.activateformbutton:hover {
+    background-color: rgb(9, 73, 138);
+} */
+
+input::-webkit-outer-spin-button, input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+}

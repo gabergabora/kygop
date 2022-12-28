@@ -1,0 +1,76 @@
+body {
+  z-index: 5000 !important;
+}
+#alert1 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+}
+
+  /* The alert message box */
+.success-alert {
+    padding: 10px 30px;
+    background-color: #07bd68;
+    border: 1px solid #058046;
+    border-radius: 5px;
+    color: white;
+    margin: 15px 0;
+  }
+  
+  /* The close button */
+  .success-closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .success-closebtn:hover {
+    color: black;
+  }
+
+#alert2 {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    align-items: center;
+    position: fixed;
+    width: 100%;
+}
+
+.error-alert {
+    padding: 10px 30px;
+    background-color: #f44336; /* Red */
+    border: 1px solid rgb(165, 9, 9);
+    border-radius: 5px;
+    color: white;
+    margin: 15px 0;
+  }
+  
+  /* The close button */
+  .error-closebtn {
+    margin-left: 15px;
+    color: white;
+    font-weight: bold;
+    float: right;
+    font-size: 22px;
+    line-height: 20px;
+    cursor: pointer;
+    transition: 0.3s;
+  }
+  
+  /* When moving the mouse over the close button */
+  .error-closebtn:hover {
+    color: black;
+  }
+
+
+  

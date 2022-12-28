@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit History</title>
+    <link rel="stylesheet" href="/stylesheets/admin/deposit.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+      <div id="div1">
+        <div id="div1box">
+            <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+             <div id="div1boxinner">
+                <p>Deposit History</p>
+                <span> 
+                    <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Deposit History</a> 
+                </span>
+            </div>
+        </div>
+    </div>
+
+    <div class="flashbox">
+      <% if(success && success.length) { %>
+             <div class="flashboxsuccess-alert">
+                 <%= success %> 
+                 <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                 
+             </div>
+         <% } %> 
+     
+         <% if(error && error.length) { %>
+                 <div class="flashboxerror-alert">
+                     <%= error %> 
+                     <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                     
+                 </div>
+         <% } %> 
+         
+  </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>DEPOSIT HISTORY</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Date</th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Amount</th>
+                          <th>Withdraw Method</th>
+                          <th>Wallet Address</th>
+                          <th>Status</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (withdrawals.length > 0) { %> 
+                        <% for (let user of clients ) { %>
+                          <% for (let withdraw of user.transaction) {%>
+                            <% if (withdraw.status !== 'Pending' && withdraw.transactionType === 'Withdraw') {%>
+                            <tr>
+                              <td><li></td>
+                                <td><%= withdraw.transactiondate %> </td>
+                                <td><%= user.firstname %> <%= user.lastname %></td>
+                                <td><%= user.email %></td>
+                                <td>$<%= withdraw.amount %></td>
+                                <td><%= withdraw.transactionmethod %> </td>
+                                <td><%= withdraw.withdrawaddress %></td>
+                              <td>
+                                <button type="button" class="btn btn-primary"><%= withdraw.status %></button>
+                              </td>
+                            </tr>
+                            <% } %> 
+                          <% } %> 
+                        <% } %>
+                        <% } else { %>
+                          <td colspan="8">No withdrawal record.</td>
+                        <% } %>
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+
+        
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

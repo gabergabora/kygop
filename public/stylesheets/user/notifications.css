@@ -1,0 +1,189 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+#div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+}
+
+
+.div2 {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    margin-top: 40px;
+}
+
+.div2box {
+    padding: 10px;
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+}
+
+.header {
+    margin: 10px 0;
+    padding-bottom: 10px;
+    border-bottom: 1px solid var( --foreground);
+    align-self: flex-start;
+}
+
+.div2boxinner {
+    width: 100%;
+}
+
+.deposithistory {
+    margin-top: 40px;
+    margin-bottom: 30px;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: center;
+
+}
+
+.deposithistorybox {
+    width: 94%;
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    align-items: flex-start;
+    background-color: var( --clr-borderBoxColor);
+    -webkit-box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    box-shadow: 0 0 5px 0 rgb(0 0 0 / 20%), 0 11px 6px -7px rgb(0 0 0 / 20%);
+    border-radius: 6px;
+    font-family: 'Oswald', sans-serif;
+    padding: 30px 20px;
+}
+
+
+.tablecontainer {
+    width: 70vw;
+    overflow-x: auto;
+    
+}
+
+.historytable {
+    border-collapse: collapse;
+    border: none;
+    width: 100%;
+    font-size:1em;
+}
+
+
+.historytable thead th {
+    position: sticky;
+    background-color: transparent;
+    top: 0;
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+    /* border-right: 1px solid black; */
+}
+
+.historytable td {
+    border-bottom: 1px solid var( --clr-tableBorderColor);
+    padding: 10px 20px;
+    font-weight: lighter;
+}
+
+/*
+.historytable tr:nth-child(even) {
+    color: black;
+}
+
+.historytable tr:nth-child(odd) {
+    color: black;
+} */
+
+/* .historytable tr:hover td {
+    color: rgb(35, 113, 190);
+    cursor: pointer;
+    background-color: floralwhite;
+} */
+
+
+
+.uploadproofbtn {
+    background-color: rgb(211, 21, 21);
+    color: white !important;
+    border: none;
+    text-decoration: none;
+    padding: 8px 16px;
+    border-radius: 5px;
+    white-space: nowrap;   
+}
+
+.uploadproofbtn:hover {
+    background-color: rgb(141, 10, 10);
+}
+
+@media (max-width:500px) {
+    #deposit {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        justify-content: center;
+        align-items: center;
+        margin-left: 0;
+    }
+    #depositform {
+        width: 80%;
+        margin: 0;
+    }
+}
+
+.modal, .modal p {
+    color: black;
+}

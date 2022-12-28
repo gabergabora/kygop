@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Dashboard</title>
+    <link rel="stylesheet" href="/stylesheets/user/dashboard.css">
+    
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+  <div class="contentbox">
+    <div id="btcwidget">
+        <%- include('../partials/darkbtcwidget')%>
+    </div>
+    <%- include('../partials/flash')%>
+
+    <div id="div1">
+        <div id="div1box">
+            <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span>
+        </div>
+    </div>
+
+    <div class="flashbox">
+        <% if(success && success.length) { %>
+               <div class="flashboxsuccess-alert">
+                   <%= success %> 
+                   <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                   
+               </div>
+           <% } %> 
+       
+           <% if(error && error.length) { %>
+                   <div class="flashboxerror-alert">
+                       <%= error %> 
+                       <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+           <% } %> 
+           
+    </div>
+
+    <div class="notificationcontainer">
+        <div class="innernotificationcontainer">
+            <% if (verificationrequest.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.coupon-requests">You have <%= couponrequest.length %> new verification request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (deposits.length > 0) { %> 
+                <span class="notification">
+                   <a href="/admin/admin.deposit-req"> You have <%= deposits.length %> new deposit request(s).</a>
+                </span>
+            <% } %>
+
+            <% if (withdrawals.length > 0) { %> 
+                <span class="notification">
+                    <a href="/admin/admin.withdrawal-req">You have <%= withdrawals.length %> new withdrawal request(s).</a>
+                </span>
+            <% } %>
+        </div>
+    </div>
+
+    <div id="div2">
+        <div id="div2box">
+            <div class="div2boxes">
+                <p><%= clients.length %> </p>
+                <a href="/admin/admin.clients">REGISTERED ACCOUNTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= Investments.length %></p>
+                <a href="/admin/admin.investment">ACTIVE INVESTMENTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= verificationrequest.length %> </p>
+                <a href="/admin/admin.verificationrequests">VERIFICATION REQUESTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= deposits.length %> </p>
+                <a href="/admin/admin.deposits">DEPOSIT REQUESTS</a>
+            </div>
+            <div class="div2boxes">
+                <p><%= withdrawals.length %> </p>
+                <a href="/admin/admin.withdrawals">WITHDRAWAL  REQUESTS</a>
+            </div>
+        </div>
+    </div>
+
+    <div id="cryptowidget">
+        <%- include('../partials/currencywidget')%>
+    </div>
+  </div>
+    
+
+  <script src="/script/app.js"></script>
+</body>
+</html>

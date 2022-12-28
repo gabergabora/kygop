@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Reviews</title>
+    <link rel="stylesheet" href="/stylesheets/admin/review.css">
+</head>
+<body>
+    <%- include('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <%- partial('../partials/flash')%>
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Reviews</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Reviews</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p>REVIEWS</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#depositMethod">
+                    <i class="fa-solid fa-plus"></i> New Review
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="depositMethod" tabindex="-1" aria-labelledby="depositMethodLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="depositMethodLabel">REVIEW</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/admin.reviews" method="post" class="depositform">
+                                <p>Leave a review.</p>
+                                <input type="text" name="username" class="depositforminput" placeholder="Username" required>
+                                <textarea name="comment" placeholder="Write your review here" id="depositformtext" cols="20" rows="10" style="resize: none;" required></textarea>
+                                <button class="btn btn-primary mt-2">Submit Review</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="depositbox2">
+                <div id="depositmethodbox">
+                    <% for (let reviews of allreviews) { %>
+                        <div class="depositmethodboxclass">
+                            <p><%= reviews.reviewdate %> </p>
+                            <p><%= reviews.username %> </p>
+                            <p><%= reviews.comment %> </p>
+                            <form action="/admin/admin.reviews/<%= reviews.id%>?_method=DELETE" class="delete" method="post">
+                                <button class="deletereview btn btn-danger">Delete</button>
+                            </form>
+                        </div>
+                    <% } %>
+                </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

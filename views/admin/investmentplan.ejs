@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Plans</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentplans.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Investment Plans</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Investment Plans</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+    
+        <div class="plansheader">
+            <div class="plansheaderbox">
+                <p>CRYPTO MINING</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#cryptomining">
+                    <i class="fa-solid fa-plus"></i> New crypto Mining Plan
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="cryptomining" tabindex="-1" aria-labelledby="cryptominingLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="cryptominingLabel">CRYPTO MINING</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/admin.investmentplans/crypto-mining" class="depositform" method="post">
+                                <p>Create a new crypto mining plan.</p>
+                                <input type="text" name="packagename" class="depositforminput" placeholder="Package Name *" required>
+                                <input type="text" name="duration" class="depositforminput" placeholder="Package Duration *" required>
+                                <input type="number" name="minimumamount" class="depositforminput" placeholder="Package Minimum Amount *" required>
+                                <input type="number" name="maximumamount" class="depositforminput" placeholder="Package Maximum Amount *" required>
+                                <!-- <input type="text" name="storage" class="depositforminput" placeholder="Mining storage *" required> -->
+                                <input type="text" name="power" class="depositforminput" placeholder="Mining Power *" required>
+                                <input type="text" name="profitpercentage" class="depositforminput" placeholder="ROI *" required>
+                                <input type="text" name="charges" class="depositforminput" placeholder="Service Charge*" required>
+                                <button type="submit" class="btn btn-primary">Create Plan</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="plansdiv">
+            <% if (cryptominingplans.length > 0) { %>
+               
+                <div class="planscontainer">
+                    <% for (var x = 0; x < cryptominingplans.length; x++) { %> 
+                        <div class="plansbox">
+                            <div>
+                                <p>Package Name: <%= cryptominingplans[x].packagename %> </p>
+                                <p>Investment Duration: <%= cryptominingplans[x].duration %></p>
+                                <p>Minimum Amount: $ <%= cryptominingplans[x].minimumamount.toLocaleString()  %></p>
+                                <p>Maximum Amount: $ <%= cryptominingplans[x].maximumamount.toLocaleString()  %></p>
+                                <p>Mining Duration: <%= cryptominingplans[x].duration %> </p>
+                                <p>Mining Power: <%= cryptominingplans[x].power %></p>
+                                <p>ROI: <%= cryptominingplans[x].profitpercentage %></p>
+                                <p>Service Charge: <%= cryptominingplans[x].charges %> of profits made.</p> 
+                            </div>
+
+                            <div class="depositmethodboxaction">
+                                <!-- Button trigger modal -->
+                                <button type="button" class="btn btn-primary editdm" data-bs-toggle="modal" data-bs-target="#cryptoMedit<%= x %>">
+                                    Edit
+                                </button>
+                                
+                                <!-- Modal -->
+                                <div class="modal fade" id="cryptoMedit<%= x %>" tabindex="-1" aria-labelledby="cryptoMeditLabel" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                        <h5 class="modal-title" id="cryptoMeditLabel">Edit <%= cryptominingplans[x].packagename %> Plan</h5>
+                                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                        </div>
+                                        <div class="modal-body">
+                                            <form action="/admin/admin.investmentplans/<%= cryptominingplans[x].id %>?_method=PUT" method="post" id="editdepositmethodform" >
+                                                    <div class="editformlabel">
+                                                       <p>Package Name *</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].packagename%>" name="packagename" id="packagename" class="depositforminput" required>
+                                                    </div>
+                                                    <div class="editformlabel">
+                                                       <p>Package Duration *</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].duration%>" name="duration" id="duration" class="depositforminput" required>
+                                                    </div>
+                                                    <div class="editformlabel">
+                                                        <p>Package Minimum Amount ($)*</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].minimumamount%>" name="minimumamount" id="minimumamount" class="depositforminput" required>
+                                                    </div>
+                                                   <div class="editformlabel">
+                                                        <p>Package Maximum Amount ($)*</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].maximumamount%>" name="maximumamount" id="maximumamount" class="depositforminput" required>
+                                                   </div>
+                                                   <div class="editformlabel">
+                                                    <p>Mining Storage *</p>
+                                                     <input type="text" value="<%=cryptominingplans[x].storage%>" name="storage" id="storage" class="depositforminput" required>
+                                                    </div>
+                                                    <div class="editformlabel">
+                                                        <p>Mining Power *</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].power%>" name="power" id="power" class="depositforminput" required>
+                                                    </div>
+                                                    <div class="editformlabel">
+                                                       <p>Daily Profit Percentage *</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].profitpercentage%>" name="profitpercentage" id="profitpercentage" class="depositforminput" required>
+                                                    </div>
+                                                    <div class="editformlabel">
+                                                       <p>Investment Service Charge *</p>
+                                                        <input type="text" value="<%=cryptominingplans[x].charges%>" name="charges" id="charges" class="depositforminput" required>
+                                                    </div>
+                                                    <button type="submit" class="btn btn-primary">Edit Package</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                    </div>
+                                </div>
+                                <form action="/admin/admin.investmentplans/<%= cryptominingplans[x].id %>?_method=DELETE" method="post" class="delete">
+                                    <button>Delete</button>
+                                </form>
+                            </div>
+                        </div>
+                    <% } %>
+                </div>
+            <% } else { %>
+                <div class="null">
+                    <p>You haven't created any crypto mining plan yet.</p>
+                </div>
+            <% } %>
+        </div>
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

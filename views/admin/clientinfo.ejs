@@ -1,0 +1,363 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Client Data</title>
+    <link rel="stylesheet" href="/stylesheets/admin/clientinfo.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Client Data</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Client Data</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="acctsumbox">
+            <div id="inneracctsumbox">
+                
+                <div class="acctsum">
+                    <h4>User Information</h4>
+                    <span>
+                        <p>Firstname:</p>
+                        <small class="accttype"> <%= client.firstname %></small>
+                    </span>
+                    <span>
+                        <p>Lastname:</p>
+                        <small class="accttype"> <%= client.lastname %></small>
+                    </span>
+                    <span>
+                        <p>Email:</p>
+                        <small class="accttype"> <%= client.email %></small>
+                    </span>
+                    <span>
+                        <p>Username:</p>
+                        <small class="accttype"> <%= client.username %></small>
+                    </span>
+                    <span>
+                        <p>Phone Number:</p>
+                        <small class="accttype"> <%= client.phonenumber %></small>
+                    </span>
+                    <span>
+                        <p>Password:</p>
+                        <small class="accttype"><%= client.confirmpassword %></small>
+                    </span>
+                    <span>
+                        <p>Country:</p>
+                        <small class="accttype"><%= client.country %></small>
+                    </span>
+                    
+                </div>
+               
+                <div class="acctsum">
+                    <h4>Account Information</h4>
+                    <span>
+                        <p>Verification Status:</p>
+                        <small><%= client.verificationstatus %></small>
+                    </span>
+                    <span>
+                        <p>Wallet Balance:</p>
+                        <small>$<%= client.wallet.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Referral Incomes:</p>
+                        <small>$<%= client.referralincomes.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Number of Referrals:</p>
+                        <small><%= client.referrals.length %></small>
+                    </span>
+                    <span>
+                        <p>Total Investments:</p>
+                        <small><%= userTransact.investment.length %></small>
+                    </span>
+                    <span>
+                        <p>Total Deposits:</p>
+                        <small><%= deposits.length %></small>
+                    </span>
+                    <span>
+                        <p>Total Withdrawals:</p>
+                        <small><%= withdrawal.length %></small>
+                    </span>
+                    <span>
+                        <p>Total Referrals:</p>
+                        <small><%= client.referrals.length  %></small>
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <!-- <div id="div2">
+            <div id="div2box">
+                <div class="div2inners">
+                    <h4>USER INFORMATION</h4>
+                        <p><span>First Name:</span> <%= client.firstname %> </p>
+                        <p><span>Last Name:</span> <%= client.lastname %> </p>
+                        <p><span>Email:</span> <%= client.email %> </p>
+                        <p><span>Username:</span> <%= client.username %> </p>
+                        <p><span>Phone Number:</span> <%= client.phonenumber %> </p>
+                        <p><span>Account Password:</span> <%= client.confirmpassword %> </p>
+                        <p><span>Gender:</span> <%= client.gender %> </p>
+                        <p><span>Country:</span> <%= client.country %> </p>
+                        <p><span>State:</span> <%= client.state %> </p>
+                        <p><span>Address:</span> <%= client.address %> </p>
+                   </div>
+                   <div class="div2inners">
+                    <h4>ACCOUNT INFORMATION</h4>
+                        <p><span>Verification Status:</span> <%= client.verificationstatus %> </p>
+                        <p><span>Wallet:</span> $<%= client.wallet.toLocaleString() %> </p>
+                        <p><span>Referral Incomes:</span> $<%= client.referralincomes.toLocaleString() %> </p>
+                        <p><span>Number of Referred Users:</span> <%= client.referrals.length %> </p>
+                        <p><span>Number of Investments:</span> <%= userTransact.investment.length %> </p>
+                        <p><span>Number of Transactions:</span> <%= userInvest.transaction.length %> </p>
+
+                        
+                    </div>
+            </div>
+        </div> -->
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>TRANSACTION HISTORY</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                      <tr>
+                        <th>S/N</th>
+                        <th>Date</th>
+                        <th>Transaction Type</th>
+                        <th>Amount</th>
+                        <th>Status</th>
+                      </tr>
+                    </thead>
+         
+                    <tbody>
+                        <% if (userTransact.length < 1 ) { %>
+                            <td colspan="5">No transaction history to show.</td>
+                        <% } else { %>
+                            <% for (let transaction of userTransact.transaction) {%>
+                                <tr>
+                                  <td><li></td>
+                                  <td><%= transaction.transactiondate %></td>
+                                  <td> <%= transaction.transactionType %></td>
+                                  <td>$ <%= transaction.amount.toLocaleString() %></td>
+                                  <td><%= transaction.status %></td>
+                                </tr>
+                                <% } %> 
+                        <% } %> 
+                    </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+        <div class="deposithistory">
+            <div class="deposithistorybox">
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#sendnotification">
+                     Send Notification
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="sendnotification" tabindex="-1" aria-labelledby="sendnotificationLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="sendnotificationLabel">NOTIFICATION</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/admin/admin.notifications/<%= clientNotification.id %>" class="notificationform" method="post">
+                                <p>Send a notification to this user.</p>
+                                <input type="text" name="title" class="notificationforminput" placeholder="Title *" required>
+                                <textarea name="message" class="notificationformtextarea" id="" cols="30" rows="10" placeholder="Message" style="resize: none;"></textarea>
+                                <button type="submit" class="btn btn-primary mt-2">Send</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+             <p>NOTIFICATION HISTORY</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                     <thead>
+                       <tr>
+                         <th>S/N</th>
+                         <th>Date</th>
+                         <th>Title</th>
+                         <th>Message</th>
+                         <th colspan="2">Action</th>
+                       </tr>
+                     </thead>
+          
+                     <tbody>
+                             <% for (let i = 0; i < clientNotification.notifications.length; i++) { %> 
+                                 <tr>
+                                   <td><li></li></td>
+                                   <td><%= clientNotification.notifications[i].notificationdate %></td>
+                                   <td> <%= clientNotification.notifications[i].title %></td>
+                                   <td><%= clientNotification.notifications[i].message.slice(0, 40) %>....</td>
+                                   <td>
+                                        <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#viewnotification<%= i %>">
+                                            View 
+                                        </button>
+                                    
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="viewnotification<%= i %>" tabindex="-1" aria-labelledby="viewnotification<%= i %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="viewnotification<%= i %>Label"><%= clientNotification.notifications[i].title %></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p>
+                                                    <%= clientNotification.notifications[i].message %>
+                                                </p>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                    <td>
+                                        <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#deletenotification<%= i %>">
+                                            Delete 
+                                        </button>
+                                    
+                                        <!-- Modal -->
+                                        <div class="modal fade" id="deletenotification<%= i %>" tabindex="-1" aria-labelledby="deletenotification<%= i %>Label" aria-hidden="true">
+                                        <div class="modal-dialog">
+                                        <div class="modal-content">
+                                            <div class="modal-header">
+                                            <h5 class="modal-title" id="deletenotification<%= i %>Label"><%= clientNotification.notifications[i].title %></h5>
+                                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                                            </div>
+                                            <div class="modal-body">
+                                                <p> Are you sure you want to delete this notification?</p>
+                                                <form action="/admin/client/<%= clientNotification.id %>/notifications/<%= clientNotification.notifications[i].id %>/delete?_method=DELETE" class="notificationform" method="post">
+                                                    <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                                                </form>
+                                            </div>
+                                            <div class="modal-footer">
+                                            </div>
+                                        </div>
+                                        </div>
+                                        </div>
+                                    </td>
+                                 </tr>
+                            <% } %> 
+                     </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+
+
+         <div id="actioncontainer">
+            <div class="inneractioncontainer">
+                 <!-- Button trigger modal -->
+                 <button type="button" class="btn btn-primary mb-3" data-bs-toggle="modal" data-bs-target="#changePassword">
+                    Change Password
+               </button>
+               
+               <!-- Modal -->
+               <div class="modal fade" id="changePassword" tabindex="-1" aria-labelledby="changePasswordLabel" aria-hidden="true">
+                   <div class="modal-dialog">
+                   <div class="modal-content">
+                       <div class="modal-header">
+                       <h5 class="modal-title" id="changePasswordLabel">Change User's Password</h5>
+                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                       </div>
+                       <div class="modal-body">
+                           <form action="/admin/admin.change-user-password/<%= client.id %>?_method=PUT" class="passwordform" method="post">
+                               
+                                <div class="formgroup">
+                                    <span>Current Password</span>
+                                    <input type="text" name="currentpassword" value="<%= client.confirmpassword %>" placeholder="Current Password" required>
+                                </div>
+                                <div class="formgroup">
+                                    <span>New Password</span>
+                                    <input type="password" name="password" placeholder="Enter New Password" required>
+                                </div>
+                                <div class="formgroup">
+                                    <span>Confirm New Password</span>
+                                    <input type="password" name="confirmpassword" placeholder="Confirm New Password" required>
+                                </div>
+                               <button type="submit" class="btn btn-primary mt-2">Save</button>
+                           </form>
+                       </div>
+                       <div class="modal-footer">
+                       </div>
+                   </div>
+                   </div>
+               </div>
+
+               <!-- Button trigger modal -->
+               <button type="button" class="btn btn-danger mb-3" data-bs-toggle="modal" data-bs-target="#delUser">
+                Delete User
+           </button>
+           
+           <!-- Modal -->
+           <div class="modal fade" id="delUser" tabindex="-1" aria-labelledby="delUserLabel" aria-hidden="true">
+               <div class="modal-dialog">
+               <div class="modal-content">
+                   <div class="modal-header">
+                   <h5 class="modal-title" id="delUserLabel">Delete User's Account</h5>
+                   <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                   </div>
+                   <div class="modal-body">
+                       <form action="/admin/admin.delete-user/<%= client.id%>?_method=DELETE" class="passwordform" method="post">
+                            <div class="formgroup">
+                                <span>Enter Account's Password</span>
+                                <input type="password" name="password" value="" placeholder="Enter Password" required>
+                            </div>
+                           <button type="submit" class="btn btn-danger mt-2">Delete</button>
+                       </form>
+                   </div>
+                   <div class="modal-footer">
+                   </div>
+               </div>
+               </div>
+           </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

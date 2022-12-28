@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Withdrawal</title>
+    <link rel="stylesheet" href="/stylesheets/user/deposit.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Withdrawal</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Withdrawal</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="walletbox">
+            <div class="walletboxinner">
+                <span class="walletamountspan">
+                    <small>Wallet Balance:</small>
+                    <% if (user.wallet === 0) { %> 
+                        <p>$0.00</p>
+                    <% } else { %> 
+                        <p>$<%= user.wallet.toLocaleString() %> </p>
+                    <% } %> 
+                </span>
+            </div>
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p>Withdrawal</p>
+                <!-- Button trigger modal -->
+                <button type="button" class="btn btn-primary depositbtn" data-bs-toggle="modal" data-bs-target="#exampleModal">
+                    <i class="fa-solid fa-plus"></i> Request Withdrawal
+                </button>
+                
+                <!-- Modal -->
+                <div class="modal fade" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                    <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                        <h5 class="modal-title" id="exampleModalLabel">Withdraw Funds</h5>
+                        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/dashboard/withdrawal" method="post" id="depositform">
+                                <p>Make a withdrawal request</p>
+                               <select name="transactionmethod" class="depositformselect" required>
+                                   <option value="" selected>Withdrawal Method</option>
+                                   <option value="Bitcoin">Bitcoin</option>
+                                   <option value="Ethereum">Ethereum</option>
+                               </select>
+                               <span><i class="fas fa-dollar-sign"></i><input type="number" placeholder="Amount" class="depositforminput" name="amount" required></span>
+                               <button type="submit">Withdraw</button>
+                            </form>
+                        </div>
+                        <div class="modal-footer">
+                        </div>
+                    </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div id="deposithistory">
+           <div id="deposithistorybox">
+            <p>WITHDRAWAL HISTORY</p>
+            <div id="tablecontainer">
+                <table id="historytable">
+                    <thead>
+                        <tr>
+                          <th>S/N</th>
+                          <th>Date</th>
+                          <th>Withdrawal Method</th>
+                          <th>Wallet Address</th>
+                          <th>Amount</th>
+                          <th>Status</th>
+                          
+                        </tr>
+                      </thead>
+         
+                    <tbody>
+                        <% if (withdrawal.length < 1 ) { %>
+                            <td colspan="6">No withdrawal has been made yet.</td>
+                        <% } else { %>
+                            <% for (let withdraw of withdrawal) {%>
+                                <tr>
+                                  <td><li></td>
+                                  <td><%= withdraw.transactiondate %></td>
+                                  <td><%= withdraw.transactionmethod %> </td>
+                                  <td><%= withdraw.withdrawaddress %></td>
+                                  <td>$<%= withdraw.amount.toLocaleString() %></td>
+                                  <td><%= withdraw.status %></td>
+                                </tr>
+                                <% } %> 
+                        <% } %>   
+                        
+                    </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

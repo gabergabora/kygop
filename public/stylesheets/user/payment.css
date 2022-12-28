@@ -1,0 +1,144 @@
+body {
+    padding: 0;
+    margin: 0;
+    /* background-color: #26394d !important; */
+}
+
+#div1 {
+    display: flex;
+    flex-direction: row;
+}
+
+#div1box {
+    display: flex;
+    flex-direction: row;
+    padding: 10px;
+    width: 90%;
+    align-items: center;
+}
+
+.mainicon {
+    color: white;
+    background-color: dodgerblue;
+    padding: 10px;
+    border-radius: 6px;
+    margin: 0 20px;
+    font-size: 1.6em;
+}
+
+#div1boxinner {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-between;
+}
+
+#div1boxinner p {
+    margin: 0;
+    font-size: 1.2em;
+}
+
+#div1boxinner a {
+    color: var( --foreground);
+    text-decoration: none;
+}
+
+.dashspan {
+    color: grey;
+}
+
+#deposit {
+    margin-top: 20px;
+    /* margin-left: 40px; */
+}
+
+#deposit h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+.fa-dollar-sign {
+    color: rgb(23, 97, 209);
+
+}
+
+#amount {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#amount h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#wallet {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+    border-bottom: 1px solid rgb(204, 204, 204);
+}
+
+#walletbox {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-between;
+}
+
+#wallet h2 {
+    font-family: 'Oswald', sans-serif;
+}
+
+#wallet img {
+    width: 150px;
+}
+
+#walletinnerbox {
+    flex-grow: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+#walletinnerbox p {
+    font-family: 'Oswald', sans-serif;
+    color: dodgerblue;
+}
+
+#walletdetails span {
+    background: rgb(9, 125, 240);
+    transition: 0.7s;
+}
+
+#walletdetails button {
+    background-color: rgb(9, 125, 240);
+    color: white;
+    transition: 0.7s;
+}
+
+#walletdetails button:hover {
+    background-color: rgb(8, 92, 175);
+}
+
+#proof {
+    margin: 15px 0;
+    width: 100%;
+    padding: 20px;
+}
+
+#submitproof button {
+    background-color: rgb(9, 125, 240);
+    color: white;
+    transition: 0.7s;
+}
+
+#submitproof button:hover {
+    background-color: rgb(231, 14, 14);
+}
+
+/* @media (max-width: 580px) {
+    #amount, #wallet, #proof {
+        width: 100%;
+    }
+} */

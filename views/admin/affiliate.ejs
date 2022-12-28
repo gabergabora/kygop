@@ -1,0 +1,75 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Affiliate Program</title>
+    <link rel="stylesheet" href="/stylesheets/admin/affiliate.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Affiliate Program</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Affiliate Program</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="div2">
+            <div id="div2box">
+                <p id="div2boxheader">List of all clients and their referrals.</p>
+                <ol>
+                    <% for (let client of clients) { %> 
+                       <div class="list">
+                        <li><%= client.firstname %> <%= client.lastname %>  </li> 
+                        <p>Referrals:</p>
+                        <% if (client.referrals.length > 0) { %> 
+                        <ol>
+                            <% for (let referral of client.referrals) { %>
+                                <li><%= referral.firstname %> <%= referral.lastname %></li>
+                            <% } %>
+                        </ol>
+                        <% } else { %>
+                            <span>No referral yet.</span>
+                        <% } %>
+                       </div>
+                    <% } %>
+                </ol> 
+            </div>
+        </div>
+
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

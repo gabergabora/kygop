@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Investment Info</title>
+    <link rel="stylesheet" href="/stylesheets/admin/investmentinfo.css">
+</head>
+<body>
+    <%- partial('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Investment Info</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Investment Info</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="gifbox">
+            <div id="innergifbox">
+                <div class="gif">
+                    <% if (investment.status === 'Completed'){ %> 
+                        <img src="/img/money.gif" alt="">
+                    <% } else if (investment.status === 'Active'){ %> 
+                        <img src="/img/rocket.gif" alt=""> 
+                    <% } %> 
+                    
+                </div>
+    
+            </div>
+        </div>
+
+
+        <div id="acctsumbox">
+            <div id="inneracctsumbox">
+                <div class="acctsum">
+                    <span>
+                        <p>Investment Type:</p>
+                        <small><%= investment.investmentType %></small>
+                    </span>
+                    <span>
+                        <p>Nining ID:</p>
+                        <small><%= investment.id %></small> 
+                    </span>
+                    <span>
+                        <p>Mining Package:</p>
+                        <small><%= investment.packagetype %></small>
+                    </span>
+                    <span>
+                        <p>Mining Duration:</p>
+                        <small><%= investment.duration %></small>
+                    </span>
+                    <span>
+                        <p>Mining Power:</p>
+                        <small><%= investment.power %></small>
+                    </span>
+
+                    <span>
+                        <p>Service Charge:</p>
+                        <small class=""><%= investment.charges%></small>
+                    </span>
+                    
+                </div>
+    
+                <div class="acctsum">
+                   
+                    <span>
+                        <p>Daily ROI:</p>
+                        <small><%= investment.profitpercentage %></small>
+                    </span>
+                    <span>
+                        <p>Invested Amount:</p>
+                        <small>$<%= investment.investedamount.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Profits:</p>
+                        <small>$<%= investment.investmentprofit.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Total Income:</p>
+                        <small>$<%= totalincome.toLocaleString() %></small>
+                    </span>
+                    <span>
+                        <p>Mining Status:</p>
+                        <% if (investment.status === 'Pending') { %> 
+                            <small class="unverifiedstat"><%= investment.status %></small>
+                        <% } else if (investment.status === 'Completed'){ %> 
+                            <small class="verifiedstat"><%= investment.status %></small>
+                        <% } else if (investment.status === 'Active'){ %> 
+                            <small class="pendingstat"><%= investment.status %></small>
+                        <% } %> 
+                        
+                    </span>
+                </div>
+            </div>
+        </div>
+
+       
+
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

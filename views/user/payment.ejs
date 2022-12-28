@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit</title>
+    <link rel="stylesheet" href="/stylesheets/user/payment.css">
+</head>
+<body>
+    <%- include('../partials/userdashboardnav')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Deposit</p>
+                    <span> 
+                        <a href="/dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Deposit</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+        <div class="flashbox">
+            <% if(success && success.length) { %>
+                   <div class="flashboxsuccess-alert">
+                       <%= success %> 
+                       <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                       
+                   </div>
+               <% } %> 
+           
+               <% if(error && error.length) { %>
+                       <div class="flashboxerror-alert">
+                           <%= error %> 
+                           <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                           
+                       </div>
+               <% } %> 
+               
+        </div>
+
+        <div id="amount">
+            <p>Amount:</p>
+            <div class="input-group mb-3">
+                 <span class="input-group-text" id="inputGroup-sizing-default"><i class="fas fa-dollar-sign"></i></span>
+                 <input type="text" class="form-control" value="<%= deposit.amount.toLocaleString() %> " aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
+             </div>
+        </div>
+         
+
+        <div id="wallet">
+            <h3>Wallet Details</h3>
+             <div id="walletbox">
+                 <% for (let img of depositmethod.depositqrcode) { %> 
+                     <img src="<%= img.url %> " alt="Bitcoin Wallet QR Code">
+                   <% } %>
+                 <div id="walletinnerbox">
+                     <p>Official <%= depositmethod.depositmethodname %> Wallet Address:</p>
+                     <div class="input-group mb-3" id="walletdetails">
+                         <span class="input-group-text" id="inputGroup-sizing-default">Wallet</span>
+                         <input type="text" class="form-control" id="copy" value="<%= depositmethod.depositaddress %>" aria-label="Sizing example input" aria-describedby="inputGroup-sizing-default" readonly>
+                         <button class="btn btn-outline-secondary" onclick="myFunction()">Copy</button>
+                     </div>
+                     <p><a href="https://www.youtube.com/watch?v=pTYLxGeLUEk" target=”_blank”>Click Here!</a> to learn how to buy Cryptocurrencies.</p>
+                 </div>
+             </div>
+        </div>
+
+        <div id="proof">
+            <h3>Upload Deposit Proof</h3>
+            <form action="/dashboard/deposits/payment/<%= deposit.id %>?_method=PUT" method="post" enctype="multipart/form-data">
+             <div class="input-group mb-3" id="submitproof" >
+                 <input type="file" name="depositproof" class="form-control" id="inputGroupFile02" required>
+                 <button class="btn btn-outline-secondary" type="submit">Upload</button>
+               </div>
+            </form>
+        </div>
+     </div>
+        
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

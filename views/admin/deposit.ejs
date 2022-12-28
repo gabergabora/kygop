@@ -1,0 +1,155 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Deposit Requests</title>
+    <link rel="stylesheet" href="/stylesheets/admin/deposit.css">
+</head>
+<body>
+    <%- partial('../partials/adminnavbar')%>
+
+    <div class="contentbox">
+        <div id="div1">
+            <div id="div1box">
+                <i class="fa-solid fa-money-bill-transfer mainicon"></i>
+                 <div id="div1boxinner">
+                    <p>Deposit Requests</p>
+                    <span> 
+                        <a href="/admin/admin.dashboard"><i class="fas fa-project-diagram"></i></a> <span class="dashspan">/</span> <a href="">Deposit Requests</a> 
+                    </span>
+                </div>
+            </div>
+        </div>
+
+        <div class="flashbox">
+          <% if(success && success.length) { %>
+                 <div class="flashboxsuccess-alert">
+                     <%= success %> 
+                     <span class="flashboxsuccess-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                     
+                 </div>
+             <% } %> 
+         
+             <% if(error && error.length) { %>
+                     <div class="flashboxerror-alert">
+                         <%= error %> 
+                         <span class="flashboxerror-closebtn" onclick="this.parentElement.style.display='none';">&times;</span>
+                         
+                     </div>
+             <% } %> 
+             
+      </div>
+
+        <div class="deposithistory">
+           <div class="deposithistorybox">
+            <p>DEPOSIT REQUESTS</p>
+            <div class="tablecontainer">
+                <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Amount</th>
+                          <th>Deposit Method</th>
+                          <th>Proof</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (deposits.length > 0) { %> 
+                        <% for (let user of clients ) { %>
+                          <% for (let deposit of user.transaction) {%>
+                            <% if (deposit.status === 'Pending' && deposit.transactionType === 'Deposit') {%>
+                            <tr>
+                              <td><li></td>
+                              <td><%= user.firstname %> <%= user.lastname %></td>
+                              <td><%= user.email %></td>
+                              <td>$<%= deposit.amount.toLocaleString() %></td>
+                              <td><%= deposit.transactionmethod %> </td>
+                              <td>
+                                  <% for (let img of deposit.transactionproof) { %> 
+                                    <img src="<%= img.url %> " class="images" alt="">
+                                  <% } %> 
+                                </td>
+                              <td>
+                                  <form action="/admin/admin.deposit-req/<%= user.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                      <button type="submit" class="verifyformbutton">Verify</button>
+                                  </form>
+                              </td>
+                            </tr>
+                            <% } %> 
+                          <% } %> 
+                        <% } %>
+                        <% } else { %>
+                          <td colspan="7">No pending deposit.</td>
+                        <% } %>
+                      </tbody>
+                  </table>
+            </div>
+           </div>
+        </div>
+
+
+        <div class="deposithistory">
+            <div class="deposithistorybox">
+             <p>OTHER PAYMENTS</p>
+             <div class="tablecontainer">
+                 <table class="historytable">
+                    <thead>
+                        <tr>
+                          <th></th>
+                          <th>Name</th>
+                          <th>Email</th>
+                          <th>Amount</th>
+                          <th>Narration</th>
+                          <th>Deposit Method</th>
+                          <th>Proof</th>
+                          <th>Action</th>
+                        </tr>
+                      </thead>
+          
+                      <tbody>
+                        <% if (payments.length > 0) { %> 
+                        <% for (let user of clients ) { %>
+                          <% for (let deposit of user.transaction) {%>
+                            <% if (deposit.status === 'Pending' && deposit.transactionType === 'Payment') {%>
+                            <tr>
+                              <td><li></td>
+                              <td><%= user.firstname %> <%= user.lastname %></td>
+                              <td><%= user.email %></td>
+                              <td>$<%= deposit.amount.toLocaleString() %></td>
+                              <td><%= deposit.narration %></td>
+                              <td><%= deposit.transactionmethod %> </td>
+                              <td>
+                                  <% for (let img of deposit.transactionproof) { %> 
+                                    <img src="<%= img.url %> " class="images" alt="">
+                                  <% } %> 
+                                </td>
+                              <td>
+                                  <form action="/admin/service-charge-payment-req/<%= user.id %>/verify/<%= deposit.id %>?_method=PUT" method="post" class="verifyform">
+                                      <button type="submit" class="verifyformbutton">Verify</button>
+                                  </form>
+                              </td>
+                            </tr>
+                            <% } %> 
+                          <% } %> 
+                        <% } %>
+                        <% } else { %>
+                          <td colspan="8">No pending payments.</td>
+                        <% } %>
+                      </tbody>
+                   </table>
+             </div>
+            </div>
+         </div>
+    
+    </div>
+    
+
+    <script src="/script/app.js"></script>
+</body>
+</html>

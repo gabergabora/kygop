@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Navbar</title>
+    <style>
+        @import url('https://fonts.googleapis.com/css2?family=Oswald:wght@500&display=swap');
+        </style>
+    <!-- CSS only -->
+<link href="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-0evHe/X+R7YkIZDRvuzKMRqM+OrBnVFBL6DOitfPri4tjfHxaWutUpFmBp4vmVor" crossorigin="anonymous">
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.1.1/css/all.min.css" integrity="sha512-KfkfwYDsLkIlwQp6LFnl8zNdLGxu9YAA1QvwINks4PhcElQSvqcyVLLD9aMhXd13uQjoXtEKNosOWaZqXgel0g==" crossorigin="anonymous" referrerpolicy="no-referrer" />    
+<link rel="stylesheet" href="/stylesheets/dashboardnav.css">
+</head>
+<body>
+    <div id="navbarcontainer">
+        <img src="/img/logo.png" id="logo" alt="Logo">
+
+        <div id="navinner">
+            <i class="fa fa-toggle-on navtoggle" aria-hidden="true"></i>
+
+            <%- partial('../partials/darkmode')%>
+
+            <div class="dropdown">
+                <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
+                <img src="/img/profilepic.png" alt="" class="profilepic">
+                <%= admin.username %>
+                </button>
+                <ul class="dropdown-menu dropdown-menu-dark" aria-labelledby="dropdownMenuButton2">
+                <li><a class="dropdown-item" href="/admin/admin.profile">Profile</a></li>
+                <li><a class="dropdown-item" href="/admin/admin.changepassword">Change Password</a></li>
+                <li><a class="dropdown-item" href="/admin.logout"><i class="fas fa-sign-out-alt"></i> Logout</a></li>
+                </ul>
+            </div>
+        </div>
+        
+    </div>
+    <div class="navbar">
+        <div class="navcontent">
+            <a href="/admin/admin.dashboard " class="navlinks" > <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span></a>
+              <!-- <span class="accordionspan">
+                <button class="accordion"><i class="fas fa-user links-icons"></i> <span>Account Profile</span></button>
+                <div class="panel">
+                    <a href=""  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Change Password</span></a>
+                    <a href=""  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Account Upgrade</span></a>
+                    <a href=""  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Notifications</span></a>
+                </div>
+              </span> -->
+              <a href="/admin/admin.clients"  class="navlinks"><i class="fas fa-user links-icons"></i> <span>Clients</span></a>
+              <a href="/admin/admin.verificationrequests"  class="navlinks"><i class="fas fa-check-circle links-icons"></i> <span>Verify Clients</span></a>
+              <!-- <span class="accordionspan">
+                <button class="accordion"><i class="fa-solid fa-money-bill-transfer links-icons"></i> <span>Deposit</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.deposit-req"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Requests</span></a>
+                    <a href="/admin/admin.depositmethods"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Methods</span></a>
+                </div>
+              </span>
+              <a href="/admin/admin.withdrawal-req"  class="navlinks"><i class="fa-solid fa-wallet  links-icons"></i> Withdrawal Requests</a> -->
+              <span class="accordionspan">
+                <button class="accordion"><i class="fa-solid fa-money-bill-transfer links-icons"></i> <span>Deposit</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.deposit-req"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Requests</span></a>
+                    <a href="/admin/admin.deposit-history"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit History</span></a>
+                    <a href="/admin/admin.depositmethods"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Deposit Methods</span></a>
+                </div>
+              </span>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fa-solid fa-wallet links-icons"></i> <span>Withdrawal</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.withdrawal-req"  class="navlinks"><i class="fa-solid fa-chevron-circle-up  links-icons"></i> Withdrawal Requests</a>
+                    <a href="/admin/admin.withdrawal-history"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Withdrawal History</span></a>
+                </div>
+              </span>
+              <span class="accordionspan">
+                <button class="accordion"><i class="fas fa-donate links-icons"></i> <span>Mining</span></button>
+                <div class="panel">
+                    <a href="/admin/admin.investment"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Mining History</span></a>
+                    <a href="/admin/admin.investmentplans"  class="accordionlinks"><i class="fas fa-chevron-circle-up links-icons"></i> <span>Mining Plans</span></a>
+                </div>
+              </span>
+              <a href="/admin/admin.affiliateprogram"  class="navlinks"><i class="fas fa-users links-icons"></i> <span>Referral Dashboard</span></a>
+              <a href="/admin/admin.reviews"  class="navlinks"><i class="fas fa-question-circle links-icons"></i> <span>Reviews</span></a>
+              <a class="navlinks" href="/admin.logout"><i class="fas fa-sign-out-alt links-icons"></i> Logout</a>
+        </div>
+    </div>
+
+
+
+    <!-- <script src="/script/app.js"></script> -->
+
+    <script>
+        var acc = document.getElementsByClassName("accordion");
+        var i;
+
+        for (i = 0; i < acc.length; i++) {
+        acc[i].addEventListener("click", function() {
+            this.classList.toggle("active");
+            var panel = this.nextElementSibling;
+            if (panel.style.maxHeight) {
+            panel.style.maxHeight = null;
+            } else {
+            panel.style.maxHeight = panel.scrollHeight + "px";
+            }
+        });
+        }
+    </script>
+    <!-- JavaScript Bundle with Popper -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.2.0-beta1/dist/js/bootstrap.bundle.min.js" integrity="sha384-pprn3073KE6tl6bjs2QrFaJGz5/SUsLqktiwsUTF55Jfv3qYSDhgCecCxMW52nD2" crossorigin="anonymous"></script>
+</body>
+</html>
