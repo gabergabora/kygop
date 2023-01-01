@@ -74,7 +74,7 @@
             
             <i class="fa fa-toggle-on navtoggle"  style="margin: 5px;" aria-hidden="true"></i>
             <%- partial('../partials/darkmode')%>
-            <span id="google_translate_element" style="margin: 5px;"></span>
+            
 
             <div class="dropdown">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="dropdownMenuButton2" data-bs-toggle="dropdown" aria-expanded="false">
@@ -105,7 +105,7 @@
                 <% } %> 
                 <small style="color: white;"><%= user.firstname %> <%= user.lastname %></small>
             </span>
-            <a href="/dashboard " class="navlinks" > <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span></a>
+            <a href="/dashboard " class="navlinks" > <i class="fas fa-project-diagram links-icons"></i> <span>Overview</span></a>
               <span class="accordionspan">
                 <button class="accordion"><i class="fas fa-user links-icons"></i> <span>Account Profile</span></button>
                 <div class="panel">
@@ -121,6 +121,10 @@
             <a href="/dashboard/affiliateprogram"  class="navlinks"><i class="fas fa-users links-icons"></i> <span>Referral Dashboard</span></a>
             <a href="/dashboard/support"  class="navlinks"><i class="fas fa-question-circle links-icons"></i> <span>Support</span></a>
             <a class="navlinks" href="/logout"><i class="fas fa-sign-out-alt links-icons"></i> Logout</a>
+
+            <div class="ggtbox">
+                <span id="google_translate_element" style="margin: 5px;"></span>
+            </div>
         </div>
     </div>
 

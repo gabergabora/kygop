@@ -9,6 +9,16 @@ body {
     color: black !important;
 }
 
+.ggtbox {
+    padding: 5px 10px;
+    width: 100%;
+    margin: 3px 0;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+}
+
 #navbarcontainer {
     display: flex;
     flex-direction: row;

@@ -14,7 +14,7 @@
 
     <div id="div1">
         <div id="div1box">
-            <i class="fas fa-project-diagram links-icons"></i> <span>Dashboard</span>
+            <i class="fas fa-project-diagram links-icons"></i> <span>Overview</span>
         </div>
     </div>
 
@@ -150,7 +150,7 @@
                     
                 </span>
                 <span>
-                    <p>Total Investments:</p>
+                    <p>Total Contracts:</p>
                     <small><%= user.investment.length %></small>
                 </span>
                 <span>
@@ -174,7 +174,7 @@
             <div class="activitybox1">
                 <h4>Recent Activities</h4>
                 <span>
-                    <p>Last Investment:</p>
+                    <p>Last Contract:</p>
                     <% if (lastinvestments.length === 0) { %>
                         <small>$0.00</small>
                     <% } else { %>
