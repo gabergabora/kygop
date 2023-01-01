@@ -139,9 +139,13 @@
                         </div>
                     </div>
 
-                    <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePP">
-                        Delete Profile Picture
-                    </button>
+                    <% if (user.profilepicture.length > 0) { %> 
+                        <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#deletePP">
+                            Delete Profile Picture
+                        </button>
+                    <% } else %> 
+
+                    
       
                     <!-- Modal -->
                     <div class="modal fade" id="deletePP" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
@@ -175,10 +179,10 @@
                         <p>Email:</p>
                         <small><%= user.email %></small>
                     </span>
-                    <span>
+                    <!-- <span>
                         <p>Username:</p>
                         <small><%= user.username %></small>
-                    </span>
+                    </span> -->
                     <span>
                         <p>Phone Number:</p>
                         <small><%= user.phonenumber %></small>
