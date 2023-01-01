@@ -11,7 +11,7 @@ const nodemailer = require("nodemailer");
 const fs = require("fs");
 const ejs = require("ejs");
 const users = require("../models/users");
-const bcrypt = require("bcryptjs");
+const bcrypt = require('bcrypt');
 
 router.post("/forgot", async (req, res) => {
     try {

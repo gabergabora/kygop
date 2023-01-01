@@ -440,11 +440,11 @@ router.post('/register/:id', async(req, res) => {
             })
         } else {
             req.flash('error', 'Password and Confirm Password does not match');
-            res.redirect('/register');
+            res.redirect(`/register/${req.params.id}`);
         }    
     } catch (e) {
         req.flash('error', e.message);
-        res.redirect('/register');
+        res.redirect(`/register/${req.params.id}`);
     }
 });
 

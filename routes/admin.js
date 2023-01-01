@@ -55,11 +55,17 @@ router.get('/secureadmin.register', (req, res) => {
 
 router.post('/secureadmin.register', async(req, res) => {
     try {
-        const { email, username, firstname, lastname, phonenumber, password, confirmpassword } = req.body;
-        const admin = new Users({email, username, firstname, lastname, phonenumber, confirmpassword, role: 'admin'});
+        const { email, firstname, lastname, phonenumber, password, confirmpassword } = req.body;
+        const admin = new Users({email, firstname, lastname, phonenumber, confirmpassword, role: 'admin'});
         if (confirmpassword == password) {
-            const registeredAdmin = await Users.register(admin, password);
-            req.login(registeredAdmin, err => {
+            // const registeredAdmin = await Users.register(admin, password);
+
+            const hashedpassword = await bcrypt.hash(password, 12);
+            admin.password = hashedpassword;
+            // const admin = await Users.register(user, password);
+            await admin.save();
+
+            req.login(admin, err => {
                 if (err) return next(err);
                 
                 req.flash('success', 'Welcome!!');
